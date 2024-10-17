@@ -3,6 +3,9 @@
     "packages": [
         "python@3.12"
     ],
+    "env": {
+        "API_KEY": "YOUR_API_KEY"
+    },
     "shell": {
         "init_hook": [
             ". $VENV_DIR/bin/activate"
@@ -11,6 +14,5 @@
             "install": "pip install -r requirements.txt",
             "start": "uvicorn main:app --port=8080"
         }
-    },
-    "env_from": ".env"
+    }
 }

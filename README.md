@@ -12,7 +12,7 @@ To setup this repo make sure to have [devbox](https://www.jetify.com/devbox/docs
 
 1. Clone this repo `git clone https://github.com/jetify-examples/python-nvidia-nemotron.git`.
 2. `cd python-nvidia-nemotron` and then run `devbox run install`
-3. Copy your NVIDIA's API key in a `.env` file in `API_KEY=nvapi-abcd...` format.
+3. Copy your NVIDIA's API key in key in devbox.json's `"env"` section.
 4. run `devbox run start`
 
 ## Usage
