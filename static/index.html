@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title> Jetify Cloud nVIDIA nemotron 70b LLM example </title>
+    <link rel="icon" href="/static/favicon.ico"></link>
+    <style>
+      :root {
+        --code-bg: #ededed;
+        --code-fg: #000;
+        --code-title-fg: #7b7b7b;
+        --code-lang-fg: #6b6b6b;
+        --code-font: monospace;
+      }
+      .code {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--code-bg);
+        padding: 6px;
+        width: 70%;
+      }
+      .code > * {
+        font-family: var(--code-font);
+      }
+      .code .info {
+        display: flex;
+        justify-content: space-between;
+      }
+      .code .title {
+        color: var(--code-title-fg);
+      }
+      .code .lang {
+        font-size: 12px;
+        color: var(--code-lang-fg);
+        align-self: flex-end;
+      }
+      .code pre {
+        color: var(--code-fg);
+        max-width: 100%;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello from Jetify Cloud</h1>
+    POST Requests to `/api/prompt` will call nVidia's nemotron model and show the response.<br/>
+    example request:
+    <div class="code">
+      <span class="lang">bash</span>  
+      <pre>    
+curl --location 'http://127.0.0.1:8080/api/prompt' --header 'Content-Type: application/json' --data '{"prompt": "What is the distance between Earth and Sun?"}'
+      </pre>
+    </div>
+  </body>
+</html>

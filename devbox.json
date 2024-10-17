@@ -1,0 +1,16 @@
+{
+    "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.12.0/.schema/devbox.schema.json",
+    "packages": [
+        "python@3.12"
+    ],
+    "shell": {
+        "init_hook": [
+            ". $VENV_DIR/bin/activate"
+        ],
+        "scripts": {
+            "install": "pip install -r requirements.txt",
+            "start": "uvicorn main:app --port=8080"
+        }
+    },
+    "env_from": ".env"
+}
