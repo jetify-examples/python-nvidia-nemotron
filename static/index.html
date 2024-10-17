@@ -1,9 +1,9 @@
+<!DOCTYPE html>
 <html>
 
 <head>
   <title> Jetify Cloud nVIDIA nemotron 70b LLM example </title>
   <link rel="icon" href="/static/favicon.ico">
-  </link>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -43,6 +43,11 @@
       background-color: #0056b3;
     }
 
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+
     #chatHistory {
       margin-top: 20px;
       border: 1px solid #ddd;
@@ -73,6 +78,50 @@
       color: #666;
       margin-bottom: 5px;
     }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      background-color: #f8f9fa;
+      margin-right: 20px;
+      border-radius: 4px;
+    }
+
+    .loading-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background-color: #007bff;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out;
+    }
+
+    .dot:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      80%,
+      100% {
+        transform: scale(0);
+      }
+
+      40% {
+        transform: scale(1.0);
+      }
+    }
   </style>
 </head>
 
@@ -83,7 +132,7 @@
   <div class="chat-container">
     <div class="input-container">
       <textarea id="messageInput" placeholder="Enter your message"></textarea>
-      <button onclick="sendMessage()">Send</button>
+      <button id="sendButton" onclick="sendMessage()">Send</button>
     </div>
     <div id="chatHistory"></div>
   </div>
@@ -91,6 +140,7 @@
   <script>
     async function sendMessage() {
       const messageInput = document.getElementById('messageInput');
+      const sendButton = document.getElementById('sendButton');
       const chatHistory = document.getElementById('chatHistory');
       const message = messageInput.value;
 
@@ -98,6 +148,27 @@
 
       // Add user message to chat
       addMessageToHistory('user-message', message);
+
+      // Add loading indicator
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'loading';
+      const loadingText = document.createElement('span');
+      loadingText.textContent = 'Waiting for response';
+      const dotsDiv = document.createElement('div');
+      dotsDiv.className = 'loading-dots';
+      for (let i = 0; i < 3; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        dotsDiv.appendChild(dot);
+      }
+      loadingDiv.appendChild(loadingText);
+      loadingDiv.appendChild(dotsDiv);
+      chatHistory.appendChild(loadingDiv);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+
+      // Disable input and button while waiting
+      messageInput.disabled = true;
+      sendButton.disabled = true;
 
       try {
         const response = await fetch('http://localhost:8080/api/prompt', {
@@ -111,12 +182,21 @@
         });
 
         const data = await response.json();
+        // Remove loading indicator
+        chatHistory.removeChild(loadingDiv);
         // Add response to chat
         addMessageToHistory('response-message', data.message.content);
         messageInput.value = ''; // Clear input after sending
 
       } catch (error) {
+        // Remove loading indicator
+        chatHistory.removeChild(loadingDiv);
         addMessageToHistory('response-message', 'Error: ' + error.message);
+      } finally {
+        // Re-enable input and button
+        messageInput.disabled = false;
+        sendButton.disabled = false;
+        messageInput.focus();
       }
     }
 
