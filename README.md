@@ -1,5 +1,7 @@
 # python-nvidia-nemotron
 
+[![Open In Devspace](https://www.jetify.com/img/devbox/open-in-devspace.svg)](https://auth.jetify.com/devspace/templates/Nvidia-Nemotron)
+
 This repo is an example that sets up a devbox environment with Python and pip. It uses Fast API to set up API endpoints listed below and calls NVIDIA API to allow interactions with nemotron LLM model.
 
 ## Setup
