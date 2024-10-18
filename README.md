@@ -21,7 +21,7 @@ Once the server is setup and running, you can access to static page by visiting 
 
 ### API
 
-The app also makes an API endpoint available to interact with OpenAI's ChatGPT. The endpoint responds to POST requests to `/api/prompt`. Below is an example request and response:
+The app also makes an API endpoint available to interact with NVIDIA's nemotron. The endpoint responds to POST requests to `/api/prompt`. Below is an example request and response:
 
 Example request:
 
