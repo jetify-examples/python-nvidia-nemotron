@@ -4,8 +4,7 @@
 
 This repo is an example that sets up a devbox environment with Python and pip. It uses Fast API to set up API endpoints listed below and calls NVIDIA API to allow interactions with nemotron LLM model.
 
-![screenshot](https://github.com/user-attachments/assets/e033a15d-0def-4785-8d95-cc6400e4f438)
-
+![image](https://raw.githubusercontent.com/jetify-examples/python-nvidia-nemotron/d8fb932c4ec7c96a035bf97abe7ff33e961e2dfa/static/screenshot.png)
 
 ## Setup
 
